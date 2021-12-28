@@ -1,12 +1,17 @@
   import flatpickr from 'flatpickr';
   import 'flatpickr/dist/flatpickr.min.css';
 
-// const inputEl = document.querySelector('#datetime-picker')
+const days = document.querySelector('[data-days]')
+const hours = document.querySelector('[data-hours]')
+const mins = document.querySelector('[data-minutes]')
+const secs = document.querySelector('[data-seconds]')
+ const valueEl = document.querySelector('.value')
+
 const startBtn = document.querySelector('button[data-start]')
- const valueEl = document.querySelector('datetime-picker')
+ const inputEl = document.querySelector('#datetime-picker')
   // inputEl.addEventListener('input', updateTimerValue);
-const date = null
-  
+   
+let selectedTime = 0;
 const options =  {
   enableTime: true,
   time_24hr: true,
@@ -15,39 +20,45 @@ const options =  {
   minuteIncrement: 1,
   onClose(selectedDates) {
     // console.log(selectedDates[0]);
-    date = selectedDates[0].getTime();
-    const currenDate = options.defaultDate.getTime()
-    if (date <=  currenDate) {
+     const selectedDate = selectedDates[0].getTime();
+    const currentDate = options.defaultDate.getTime()
+    if (selectedDate <=  currentDate) {
       alert('Please choose a date in the future');
       return;
     }
+    selectedTime = selectedDates[0]
     startBtn.disabled = false
   },
 }
-flatpickr("input[type = 'text']", options);
-startBtn.disabled = true
-      startBtn.addEventListener('click', () => {
-  timer.end()
-})
-const timer = {
-    isActive: false,
-    end() {
-        if (this.isActive) {
-        return
-      }
-      const endTime = Date.now()
-      this.isActive = true
+flatpickr(inputEl, options);
 
-      this.setInterval(() => {
-        const currenTime = Date.now()
-        // console.log(currenTime);
-        const ms = currenTime -endTime
-          const { days, hours, mins, secs } = convertMs(ms)
+
+startBtn.addEventListener('click', onBtnClick)
+
+      function onBtnClick() {
+        startBtn.disabled = true;
+          // const endTime = Date.now()
+
+        setInterval(() => {
+          const currentTime = Date.now()
+          console.log(currentTime);
+          const counteTime = selectedTime.getTime() - currentTime
+          console.log(convertMs(counteTime));
+        const  { days, hours, mins, secs } = convertMs(counteTime)
          updateTimerValue({days, hours, mins, secs})
           console.log(`${days}:${hours}:${mins}:${secs}`);
       }, 1000)
-   }
+
 }
+// const timer = {
+//     isActive: false,
+//     end() {
+//         if (this.isActive) {
+//         return
+//       }
+    
+//    },
+// }
 
 function updateTimerValue({days, hours, mins, secs}) {
 valueEl.textContent = `${days}:${hours}:${mins}:${secs}`
