@@ -47,16 +47,3 @@ function onSubmitClick(e) {
       });
   }, step)
 }
-
-
-
-
-// function onSuccess(result) {
-//   console.log(onSuccess);
-//   console.log(result);
-// }
-// function OnError(error) {
-//   console.log(OnError);
-//   console.log(error);
-
-// }
