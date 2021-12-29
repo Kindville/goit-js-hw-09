@@ -9,4 +9,4 @@ var t,o=arguments[3];!function(o,i){"function"==typeof t&&t.amd?t([],function(){
 },{}],"GyVV":[function(require,module,exports) {
 "use strict";var e=n(require("notiflix")),t=require("notiflix/build/notiflix-notify-aio");function n(e){return e&&e.__esModule?e:{default:e}}const i=document.querySelector(".form");function r(e,t){return new Promise((n,i)=>{const r=Math.random()>.3;setInterval(()=>{r?n({position:e,delay:t}):i({position:e,delay:t})},t)})}i.addEventListener("submit",u);let o=0;function u(t){t.preventDefault();let n=Number(t.currentTarget.elements.delay.value);const i=Number(t.currentTarget.elements.step.value),u=Number(t.currentTarget.elements.amount.value);setInterval(()=>{o!=u&&(o+=1,setTimeout(()=>{n+=i}),r(2,1500).then(({position:t,delay:n})=>{e.default.Notify.success(`✅ Fulfilled promise ${t} in ${n}ms`)}).catch(({position:t,delay:n})=>{e.default.Notify.failure(`❌ Rejected promise ${t} in ${n}ms`)}))},i)}
 },{"notiflix":"hWOm","notiflix/build/notiflix-notify-aio":"MeeU"}]},{},["GyVV"], null)
-//# sourceMappingURL=/goit-js-hw-09/03-promises.d1fa6b15.js.map
+//# sourceMappingURL=/goit-js-hw-09/03-promises.ad01f401.js.map
