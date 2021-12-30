@@ -38,7 +38,7 @@ function onSubmitClick(e) {
     position += 1;
     setTimeout(() => { delay += step; })
     
-    createPromise(2, 1500)
+    createPromise(position, delay)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
